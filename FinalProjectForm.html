@@ -1,0 +1,185 @@
+<html>
+<head>
+<title>Janel Greer - Final Project</title>
+<META http-equiv=Content-Type content="text/html; charset=iso-8859-1">
+<link type="text/css" rel="stylesheet" href="FormCSS.css" />
+<script language="JavaScript">
+<!--Hide the script from other browser
+
+//Reminder timeout
+setTimeout(function(){ alert(" Quick Reminder:\nPlease check your email after you sign up.\n"); }, 20000);
+
+//Check age
+function getAge()
+{	
+	var a;
+	a = parseInt(prompt("Please enter your age.\nYou must be at least 18 or older to sign up for Digital Tech.",""));
+	while (isNaN(a) || a < 18)
+		a = parseInt(prompt("You must be at least 18 or older to sign up for Digital Tech.",""));
+	return a;
+}
+
+//Get info
+function calc()
+{	
+//Declare variables
+	var retry = true;
+	var phoneNumber = parseInt(document.forms[0].Number.value);  // Testing numeric
+//Checking for name/number/gender/classes
+	if (document.forms[0].Name.value == "" || document.forms[0].Name.value == "Enter your name")  // Testing name textbox
+	{
+		alert("Please enter your name.");
+		document.forms[0].Name.value = "";
+		document.forms[0].Name.focus();
+		return false;
+	}
+	else if (isNaN(phoneNumber) || document.forms[0].Number.value == "") // Testing number textbox
+	{
+		alert("Please enter your numeric phone number.");
+		document.forms[0].Number.value = "";
+		document.forms[0].Number.focus();
+		return false;
+	}
+	
+	else if  (!document.forms[0].rb[0].checked && !document.forms[0].rb[1].checked) // Testing radio buttons
+	{
+		alert("Please select your gender.");
+		return false;
+	}
+	
+	else if (!document.forms[0].cb[0].checked && !document.forms[0].cb[1].checked && !document.forms[0].cb[2].checked && !document.forms[0].cb[3].checked) // Testing checkboxes
+	{
+		alert("Please select at least one class.");
+		return false;
+	}
+	
+	var cost;
+	if (document.forms[0].rb[0].checked || document.forms[0].rb[1].checked)
+	{ 
+		cost = 0;
+		if (document.forms[0].cb[0].checked)
+			cost += 90.00;
+		if (document.forms[0].cb[1].checked)
+			cost += 70.00;
+		if (document.forms[0].cb[2].checked)
+			cost += 60.00;
+		if (document.forms[0].cb[3].checked)
+			cost += 65.00;
+		document.forms[0].cost.value = cost.toFixed(2);
+	
+//Create cookies
+	var savedData = decodeURI(document.cookie);
+	if (savedData.length > 0) 
+	{
+		var storedName;
+		var storedNumber;
+		var storedCost;
+		var dataArray = savedData.split("; ");
+		for (var i = 0; i < dataArray.length; ++i) 
+		{
+			if (dataArray[i].substring(0,dataArray[i].indexOf("=")) == "Name") 
+			{
+				storedName = dataArray[i].substring(dataArray[i].indexOf("=") + 1,dataArray[i].length);
+			}
+			if (dataArray[i].substring(0,dataArray[i].indexOf("=")) == "Number") 
+			{
+				storedNumber = dataArray[i].substring(dataArray[i].indexOf("=") + 1,dataArray[i].length);
+			}
+			if (dataArray[i].substring(0,dataArray[i].indexOf("=")) == "cost") 
+			{
+				storedCost = dataArray[i].substring(dataArray[i].indexOf("=") + 1,dataArray[i].length);
+			}
+		}
+		if (storedName == document.forms[0].Name.value && storedNumber == document.forms[0].Number.value && storedCost == + document.forms[0].cost.value) // Testing repeat cookies
+		{
+			retry = window.confirm("That exact name, number, and class combination has already been entered.\nDo you want to try again?");
+		}
+	}
+	if (retry == true && storedName != document.forms[0].Name.value || storedNumber != document.forms[0].Number.value || storedCost != document.forms[0].cost.value)
+	
+	var expiresDate = new Date();
+		expiresDate.setMonth(expiresDate.getMonth() + 9);
+		document.cookie = "Name=" + encodeURIComponent(document.forms[0].Name.value) + ";expires=" + expiresDate.toUTCString();
+		document.cookie = "Number=" + encodeURIComponent(document.forms[0].Number.value) + ";expires=" + expiresDate.toUTCString();
+    	document.cookie = "cost=" + encodeURIComponent(document.forms[0].cost.value) + ";expires=" + expiresDate.toUTCString();
+    	alert("Your name, number, and classes have been submitted and saved.");
+	
+		return true;
+	}
+}
+
+//Get date
+var dateToday = new Date();
+var monthsOfYear = new Array(12);
+monthsOfYear[0] = "January";
+monthsOfYear[1] = "February";
+monthsOfYear[2] = "March";
+monthsOfYear[3] = "April";
+monthsOfYear[4] = "May";
+monthsOfYear[5] = "June";
+monthsOfYear[6] = "July";
+monthsOfYear[7] = "August";
+monthsOfYear[8] = "September";
+monthsOfYear[9] = "October";
+monthsOfYear[10] = "November";
+monthsOfYear[11] = "December";
+var daysOfWeek = new Array("Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday");
+
+function loadDate()
+{
+	var today = (dateToday.getMonth()+1) + "/" + dateToday.getDate() + "/" + dateToday.getFullYear();
+	var txt = "Today's Date: "
+	document.writeln (txt.bold() + monthsOfYear[dateToday.getMonth()] + " " + dateToday.getDate() + ", " + dateToday.getFullYear());
+}
+
+
+// Stop hiding from other browers -->
+</script>
+
+</head>
+
+<body>
+	<div id="wrapper">
+		<form method=post>
+		<h2><img src="image.gif" name="image" alt="Digital Tech Computer Training"/></h2>
+			<div id="menu">
+			</div>
+			<p class="UserPrompt">Name</p>
+			<p><input type="text" name="Name" value = "Enter your name" size="25" onclick='document.forms[0].Name.value = ""'></p>
+			<p class="UserPrompt">Phone Number</p>
+			<p><input type="text" name="Number" size="10"></p>
+			<p class="UserPrompt">Please Select Your Gender</p>
+			<div>
+				<p><input type="radio" name="rb" value="Male">Male</p>
+				<p><input type="radio" name="rb" value="Female">Female</p>
+			</div>
+			<p class="UserPrompt">Please Select A Class &emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp; Price</p>
+			<div>
+				<p><input type="checkbox" name="cb">Computer Programming &emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp; $90.00</p>
+				<p><input type="checkbox" name="cb">Hardware Configuration &emsp;&emsp;&emsp;&emsp; $70.00</p>
+				<p><input type="checkbox" name="cb">Database Development &emsp;&emsp;&emsp;&emsp; $60.00</p>
+				<p><input type="checkbox" name="cb">Web Design &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; $65.00</p>
+			</div>
+			<p class="UserPrompt">Total Order: </p>
+			<div id="answerbox">
+				<p>$<input type=text value="0" name="cost" SIZE=10 readonly="readonly";></p>
+			</div>
+			<div>
+			<div>
+			<p class="UserPrompt2">Classes Start May 20th!<p>
+			</div>
+			<script type="text/javascript">
+				loadDate();
+				getAge();
+				</script>
+			</div>
+			<div id="commandbuttons">
+				<input type="button" value="Submit" onClick="return calc();"/>
+			<!-- Reset button will reset the form and set the focus to the name field -->
+				<input type="Reset" value="Reset" onClick="document.forms[0].elements[0].focus();">
+			</div>
+
+		</form>
+	</div>
+</body>
+</html>

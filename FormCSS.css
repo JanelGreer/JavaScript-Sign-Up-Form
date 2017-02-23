@@ -1,0 +1,44 @@
+
+h2{ padding-top: 10px;
+text-align: center;
+font: bold 23px/23px Verdana;
+}
+#wrapper {
+		width: 500px;
+		padding-left:10px;
+		background-color:lightgrey;
+		font: 16px/17px arial;
+	}
+#commandbuttons {
+			padding-bottom: 10px;
+			padding-top: 10px;
+			margin-top: 5px;
+	}
+#menu{
+		width: 355px;
+		float: left;
+		padding-right: 36px;
+		}
+.userprompt {
+			text-align: left;
+			padding-top: 10px;
+			padding-left: 3px;
+			font: bold 16px/20px arial;
+	}
+.userprompt2 {
+			text-align: left;
+			padding-top: 10px;
+			padding-left: 1px;
+			font: bold 16px/21px arial;
+	}
+
+#answerbox {
+			text-align: left;
+	}
+#checkbox{
+	margin:13px;
+	display: inline-block;
+}
+#box {
+display: inline-block;
+}
